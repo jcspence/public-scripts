@@ -58,6 +58,13 @@ I'm attending a CTF this evening, so I took a few minutes to clean up and publis
     # Now, reboot again.
     #sudo reboot
 
+<!-- May want to add: 
+- clone reference repo
+- install burp?
+- let msfconsole initialize / register metasploit
+- installing a network manager / configuring extra ethernet interfaces
+-->
+
 ## Configure Software
 
 
