@@ -1,0 +1,20 @@
+{ 
+  "name": "jcspence",
+  "pass": "aabbccdd",
+  "host": "netbook1",
+  "jobs": [
+    { 
+      "name": "jcspence-temp",
+      "path": "/home/jcspence/temp/"
+    }
+  ],
+  "sftp_sinks": [
+    { 
+      "hostname": "server.domain",
+      "username": "jcspence",
+      "directory": "/mnt/blah/temporary/testing/backup",
+      "port": 22,
+      "keyfile": "/home/jcspence/.ssh/id_ed25519_2016-07-01"
+    }
+  ]
+}
