@@ -91,4 +91,12 @@ I'm attending a CTF this evening, so I took a few minutes to clean up and publis
     git config --add --global user.name "Name"
     git config --add --global user.email "Email"
 
+    # Configure vim.
+    cat << eof >> ~/.vimrc
+    set tabstop=4
+    set autoindent
+    set expandtab
+    " no automatic visual mode.
+    set mouse-=a
+    eof
 
