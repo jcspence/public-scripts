@@ -59,6 +59,13 @@ I'm attending a CTF this evening, so I took a few minutes to clean up and publis
     # Now, reboot again.
     #sudo reboot
 
+<!-- May want to add: 
+- clone reference repo
+- install burp?
+- let msfconsole initialize / register metasploit
+- installing a network manager / configuring extra ethernet interfaces
+-->
+
 ## Configure Software
 
 
@@ -85,4 +92,12 @@ I'm attending a CTF this evening, so I took a few minutes to clean up and publis
     git config --add --global user.name "Name"
     git config --add --global user.email "Email"
 
+    # Configure vim.
+    cat << eof >> ~/.vimrc
+    set tabstop=4
+    set autoindent
+    set expandtab
+    " no automatic visual mode.
+    set mouse-=a
+    eof
 
