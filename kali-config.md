@@ -22,6 +22,7 @@ I'm attending a CTF this evening, so I took a few minutes to clean up and publis
 
     # Update bbqsql.
     # The touch at the end tells my configuration scripts that bbqsql has been installed.
+    sudo dnf install -y python-pip &&
     sudo pip install gevent requests &&
     mkdir -p ~/src &&
     cd ~/src &&
