@@ -26,3 +26,7 @@ gpg-connect-agent updatestartuptty /bye' >> ~/.bashrc
 
 . ~/.bashrc 
 ```
+
+Misc
+
+	ssh-add -L | grep cardno:000 > ~/.ssh/yubikey.pub
