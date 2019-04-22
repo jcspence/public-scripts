@@ -30,3 +30,6 @@ gpg-connect-agent updatestartuptty /bye' >> ~/.bashrc
 Misc
 
 	ssh-add -L | grep cardno:000 > ~/.ssh/yubikey.pub
+
+
+	gpg2 --card-status
