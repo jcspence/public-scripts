@@ -33,3 +33,9 @@ Misc
 
 
 	gpg2 --card-status
+
+List ports <https://www.forgesi.net/gpg-smartcard/>
+
+    echo scd getinfo reader_list | gpg-connect-agent --decode
+
+set port in ~/.gnupg/scdaemon.conf with reader-port [port]
