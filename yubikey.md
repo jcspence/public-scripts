@@ -21,7 +21,7 @@ eof
 gpg-connect-agent /bye
 
 echo 'export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 gpg-connect-agent updatestartuptty /bye' >> ~/.bashrc 
 
 . ~/.bashrc 
