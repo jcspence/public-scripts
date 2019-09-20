@@ -1,5 +1,5 @@
-#!/usr/bin/env sh -e
-set -v
+#!/usr/bin/env sh
+set -v -e
 
 # User specific config - should not interact with user.
 
