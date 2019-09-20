@@ -8,11 +8,25 @@ sudo apt-get update
 sudo apt-get install -y \
 	bash \
 	build-essential \
+	curl \
+	dtrx \
 	git \
+	gnupg \
 	linux-headers-$(uname -r) \
+	mosh \
+	ncdu \
 	openssh-server \
+	pandoc \
+	pv \
+	python \
+	python-pip \
+	python3 \
+	python3-pip \
+	srm \
+	tmux \
 	vim \
 	virtualbox-guest-dkms \
+	wget \
 	zsh
 
 # TODO configure sshd
