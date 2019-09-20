@@ -32,3 +32,9 @@ set expandtab
 set mouse-=a
 eof
 
+# Add ssh authorized keys.
+[ -e ~/.ssh/authorized_keys ] || {
+  mkdir -p ~/.ssh &&
+  curl -Ss -o ~/.ssh/authorized_keys https://ecbf.us/carey.keys &&
+  chmod go= -R ~/.ssh
+}
