@@ -22,7 +22,6 @@ sudo apt install -y \
 	python-pip \
 	python3 \
 	python3-pip \
-	srm \
 	tmux \
 	vim \
 	virtualbox-guest-dkms \
