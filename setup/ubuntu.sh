@@ -4,8 +4,8 @@ set -e -v
 # setup/ubuntu.sh
 # Performs some setup for new systems (ubuntu).
 
-sudo apt-get update
-sudo apt-get install -y \
+sudo apt update
+sudo apt install -y \
 	bash \
 	build-essential \
 	curl \
@@ -37,5 +37,5 @@ sudo apt-get install -y \
 ./setup/general-user-interactive.sh
 
 # Update?
-sudo apt-get update
+sudo apt upgrade
 # May need to reboot and install more linux headers.
