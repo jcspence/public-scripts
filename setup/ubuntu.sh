@@ -6,12 +6,14 @@ set -e -v
 
 sudo apt-get update
 sudo apt-get install -y \
-	linux-headers-$(uname -r)
-
-# TODO install(/ensure) git, vim, bash, zsh
-# TODO install build-essential 
-
-# TODO install vbox guest additions
+	bash \
+	build-essential \
+	git \
+	linux-headers-$(uname -r) \
+	openssh-server \
+	vim \
+	virtualbox-guest-dkms \
+	zsh
 
 # TODO configure sshd
 
