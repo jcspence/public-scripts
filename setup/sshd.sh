@@ -16,7 +16,8 @@ sudo sed -i \
 # Verify
 sudo grep '^PasswordAuthentication no$' /etc/ssh/sshd_config >/dev/null
 
-# Enable and start.
+# Enable service to start at boot.
 sudo systemctl enable ssh
-sudo systemctl start ssh
+# Ensure service is started/restarted to load new configuration.
+sudo systemctl restart ssh
 
