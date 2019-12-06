@@ -6,26 +6,33 @@ set -e -v
 
 sudo apt update
 sudo apt install -y \
+	apparmor-utils \
 	bash \
 	build-essential \
+	cmake \
+	ctags \
 	curl \
 	dtrx \
 	git \
 	gnupg \
 	linux-headers-$(uname -r) \
+	make \
 	mosh \
 	ncdu \
 	openssh-server \
 	pandoc \
 	pv \
 	python \
+	python-dev \
 	python-pip \
 	python3 \
+	python3-dev \
 	python3-pip \
 	tmux \
 	vim \
 	virtualbox-guest-dkms \
 	wget \
+	xclip \
 	zsh
 
 # TODO configure sshd

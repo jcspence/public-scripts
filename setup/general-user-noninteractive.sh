@@ -3,6 +3,10 @@ set -v -e
 
 # User specific config - should not interact with user.
 
+# TODO possibly add config dir
+
+pip3 install --user pyyaml pipenv
+
 # Template git config.
 [ -e ~/.gitconfig ] || 
 cat << eof >> ~/.gitconfig
@@ -38,3 +42,5 @@ eof
   curl -Ss -o ~/.ssh/authorized_keys https://ecbf.us/carey.keys &&
   chmod go= -R ~/.ssh
 }
+
+# TODO install YouCompleteMe
