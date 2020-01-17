@@ -10,6 +10,9 @@
 
 # TODO Clean up stdout.
 
+[ -x ~/.config/battery-watch ] &&
+	. ~/.config/battery-watch
+
 function discord () { 
     username="$HOSTNAME"
     # If you would like this script to post to Discord, put 
