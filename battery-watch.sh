@@ -66,21 +66,31 @@ while sleep "${BATTERY_WATCH_DELAY:-15}"; do
 
     if [ "$ac" == 0 ] && [ "$bat" -lt 20 ]; then 
         # Running on batteries and battery is low.
-        discord ":warning: ${HOSTNAME}: Low battery! $bat%" &
-        # Only make nagbar if needed.
-        ps $complainpid >/dev/null || complain "Low battery! $bat%"
-        # Refresh if new level.
-        [ "$bat" -ne "$oldbat" ] && { kill "$complainpid"; complain "Low battery! $bat%"; }
+		# If there's no nagbar yet
+		if ! ps $complainpid >/dev/null 
+		then
+			# Make nagbar
+			complain "Low battery! $bat%"
+			# Post caution
+			discord ":warning: ${HOSTNAME}: Low battery! $bat%" &
+		elif [ "$bat" -ne "$oldbat" ]
+		then
+			# Battery level has changed.
+			# Update nagbar.
+			kill "$complainpid"; complain "Low battery! $bat%"
+			# Update discord.
+			discord ":warning: ${HOSTNAME}: Low battery! $bat%" &
+		fi
 
     elif [ "$bat" -eq 100 ] && [ "$oldbat" -ne 100 ]; then 
         # Charged
         discord ":white_check_mark: ${HOSTNAME}: Battery charged! $bat%"
 
-    else 
-        # If the battery jumps from <20 to 100, this will not fire.
+	elif [ "$complainpid" -ne 1000000 ]; then
+        # If the battery jumps from <20 to 100, this will not fire until the second loop.
         # In that case, the user may just manually kill the nagbar.
         # Kill nagbar if up
-        ps "$complainpid" && kill "$complainpid"
+		ps "$complainpid" && kill "$complainpid"
     fi;
 
 done
