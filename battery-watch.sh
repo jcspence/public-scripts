@@ -18,11 +18,12 @@ function discord () {
     # https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks
     # Slack may be supported - just set slack_url and dest.
     # https://api.slack.com/incoming-webhooks
-    slack_url=''
-    dest=''
-    msg="$*"
+	slack_url="$BATTERY_WATCH_WEBHOOK"
+    dest="$BATTERY_WATCH_DEST"
+    msg="$1"
 
-    [ -n "$slack_url" ] && curl -X POST --data-urlencode 'payload={"channel": "'"$dest"'", "username": "'"$username"'", "text": "'"$msg"'", "icon_emoji": ":comet:"}'  "$slack_url"
+    [ -n "$slack_url" ] && 
+		curl -X POST --data-urlencode 'payload={"channel": "'"$dest"'", "username": "'"$username"'", "text": "'"$msg"'", "icon_emoji": ":comet:"}'  "$slack_url"
 }
 
 function complain () { 
@@ -39,7 +40,7 @@ complainpid=1000000
 bat=0; ac=5;
 
 # Main loop.
-while sleep 15; do 
+while sleep "${BATTERY_WATCH_DELAY:-15}"; do 
     
     # Watch power source.
 
@@ -49,7 +50,7 @@ while sleep 15; do
     # If change then notify.
     if [ "$ac" -ne "$oldac" ]; then
         if [ "$ac" == 1 ]; then
-            discord ":electric_plug: $HOSTNAME has been connected to AC power."
+            discord ":electric_plug: $HOSTNAME is connected to AC power."
         else
             discord ":battery: $HOSTNAME is running on batteries."
         fi
