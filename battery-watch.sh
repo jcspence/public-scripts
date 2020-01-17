@@ -34,6 +34,12 @@ function complain () {
     complainpid=$!
 }
 
+function ensure_nagbar_down () { 
+    ps "$complainpid" && kill "$complainpid"
+	# Mark that no nagbar is active.
+	complainpid=1000000
+} 
+
 function battery-check () {
     cat /sys/class/power_supply/BAT?/capacity
 }
@@ -77,7 +83,8 @@ while sleep "${BATTERY_WATCH_DELAY:-15}"; do
 		then
 			# Battery level has changed.
 			# Update nagbar.
-			kill "$complainpid"; complain "Low battery! $bat%"
+			ensure_nagbar_down
+			complain "Low battery! $bat%"
 			# Update discord.
 			discord ":warning: ${HOSTNAME}: Low battery! $bat%" &
 		fi
@@ -89,8 +96,7 @@ while sleep "${BATTERY_WATCH_DELAY:-15}"; do
 	elif [ "$complainpid" -ne 1000000 ]; then
         # If the battery jumps from <20 to 100, this will not fire until the second loop.
         # In that case, the user may just manually kill the nagbar.
-        # Kill nagbar if up
-		ps "$complainpid" && kill "$complainpid"
+		ensure_nagbar_down
     fi;
 
 done
