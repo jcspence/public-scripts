@@ -56,22 +56,22 @@ ac=5
 # Main loop.
 while sleep "${BATTERY_WATCH_DELAY:-15}"; do
 	
-	# Watch power source.
+	# Preserve last status
 	oldac="$ac";
-	read ac < /sys/class/power_supply/AC/online;
+	oldbat="$bat"
 
-	# If change then notify.
+	# Get data
+	read ac < /sys/class/power_supply/AC/online;
+	bat="$(battery-check)"
+
+	# Notify on AC power change.
 	if [ "$ac" -ne "$oldac" ]; then
 		if [ "$ac" == 1 ]; then
 			discord ":electric_plug: $HOSTNAME is connected to AC power."
 		else
-			discord ":battery: $HOSTNAME is running on batteries."
+			discord ":battery: $HOSTNAME is running on batteries at ${bat}%."
 		fi
 	fi
-
-	# Watch battery.
-	oldbat="$bat"
-	bat="$(battery-check)"
 
 	if [ "$ac" == 0 ] && [ "$bat" -lt 20 ]; then
 	# Running on batteries and battery is low.
