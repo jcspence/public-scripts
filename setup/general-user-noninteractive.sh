@@ -43,4 +43,13 @@ eof
   chmod go= -R ~/.ssh
 }
 
+# Create a private key.
+ls ~/.ssh/id_* > /dev/null 2>&1 || {
+  ssh-keygen \
+	-t ed25519 \
+	-f ~/.ssh/id_ed25519 \
+	-C "$USER@$HOSTNAME $(date +%Y-%m-%d)" \
+	-N ''
+}
+
 # TODO install YouCompleteMe
