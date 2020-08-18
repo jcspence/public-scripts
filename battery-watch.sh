@@ -10,28 +10,7 @@
 
 # TODO Clean up stdout.
 
-[ -x ~/.config/battery-watch ] &&
-	. ~/.config/battery-watch
-
-function discord () {
-	username="$HOSTNAME"
-	# If you would like this script to post to Discord, put
-	#  an appropriate webhook url in 'slack_url', after appending
-	#  /slack to the url.
-	# https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks
-	# Slack may be supported - just set slack_url and dest.
-	# https://api.slack.com/incoming-webhooks
-	slack_url="$BATTERY_WATCH_WEBHOOK"
-	dest="$BATTERY_WATCH_DEST"
-	msg="$1"
-
-	[ -n "$slack_url" ] &&
-		curl \
-			-X POST \
-			--data-urlencode \
-			'payload={"channel": "'"$dest"'", "username": "'"$username"'", "text": "'"$msg"'", "icon_emoji": ":comet:"}' \
-			"$slack_url"
-}
+. "$(dirname "$0")/discord-notify.sh"
 
 function complain () {
 	i3-nagbar --message "$*" &
@@ -67,9 +46,9 @@ while sleep "${BATTERY_WATCH_DELAY:-15}"; do
 	# Notify on AC power change.
 	if [ "$ac" -ne "$oldac" ]; then
 		if [ "$ac" == 1 ]; then
-			discord ":electric_plug: $HOSTNAME is connected to AC power."
+			discord-notify ":electric_plug: $HOSTNAME is connected to AC power."
 		else
-			discord ":battery: $HOSTNAME is running on batteries at ${bat}%."
+			discord-notify ":battery: $HOSTNAME is running on batteries at ${bat}%."
 		fi
 	fi
 
@@ -80,19 +59,19 @@ while sleep "${BATTERY_WATCH_DELAY:-15}"; do
 			# Make nagbar
 			complain "Low battery! $bat%"
 			# Post caution
-			discord ":warning: ${HOSTNAME}: Low battery! $bat%" &
+			discord-notify ":warning: ${HOSTNAME}: Low battery! $bat%" &
 		elif [ "$bat" -ne "$oldbat" ]; then
 			# Battery level has changed.
 			# Update nagbar.
 			ensure_nagbar_down
 			complain "Low battery! $bat%"
 			# Update discord.
-			discord ":warning: ${HOSTNAME}: Low battery! $bat%" &
+			discord-notify ":warning: ${HOSTNAME}: Low battery! $bat%" &
 		fi
 
 	elif [ "$bat" -eq 100 ] && [ "$oldbat" -ne 100 ]; then
 	# Battery is now fully charged
-	discord ":white_check_mark: ${HOSTNAME}: Battery charged! $bat%"
+	discord-notify ":white_check_mark: ${HOSTNAME}: Battery charged! $bat%"
 
 	elif [ "$complainpid" -ne 1000000 ]; then
 	# There is a nagbar open, but the system is running on AC power or the battery is not low.
