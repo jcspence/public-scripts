@@ -46,9 +46,9 @@ while sleep "${BATTERY_WATCH_DELAY:-15}"; do
 	# Notify on AC power change.
 	if [ "$ac" -ne "$oldac" ]; then
 		if [ "$ac" == 1 ]; then
-			discord-notify ":electric_plug: $HOSTNAME is connected to AC power."
+			discord-notify ":electric_plug: :information_source: $HOSTNAME is connected to AC power."
 		else
-			discord-notify ":battery: $HOSTNAME is running on batteries at ${bat}%."
+			discord-notify ":battery: :information_source: $HOSTNAME is running on batteries at ${bat}%."
 		fi
 	fi
 
@@ -59,19 +59,19 @@ while sleep "${BATTERY_WATCH_DELAY:-15}"; do
 			# Make nagbar
 			complain "Low battery! $bat%"
 			# Post caution
-			discord-notify ":warning: ${HOSTNAME}: Low battery! $bat%" &
+			discord-notify ":battery: :warning: ${HOSTNAME}: Low battery! $bat%" &
 		elif [ "$bat" -ne "$oldbat" ]; then
 			# Battery level has changed.
 			# Update nagbar.
 			ensure_nagbar_down
 			complain "Low battery! $bat%"
 			# Update discord.
-			discord-notify ":warning: ${HOSTNAME}: Low battery! $bat%" &
+			discord-notify ":battery: :warning: ${HOSTNAME}: Low battery! $bat%" &
 		fi
 
 	elif [ "$bat" -eq 100 ] && [ "$oldbat" -ne 100 ]; then
 	# Battery is now fully charged
-	discord-notify ":white_check_mark: ${HOSTNAME}: Battery charged! $bat%"
+	discord-notify ":battery: :white_check_mark: ${HOSTNAME}: Battery charged! $bat%"
 
 	elif [ "$complainpid" -ne 1000000 ]; then
 	# There is a nagbar open, but the system is running on AC power or the battery is not low.
