@@ -4,21 +4,23 @@ set -e -v
 # setup/fedora.sh
 # Performs some setup for new systems (fedora).
 
-# TODO install build essential equivalent
-
 sudo dnf install -y \
+	'@C Development Tools and Libraries' \
+	'@Development Libraries' \
+	'@Development Tools' \
 	cmake \
 	ctags \
 	curl \
-	dtrx \
 	git \
 	gnupg \
 	magic-wormhole \
-	make \
 	ncdu \
 	openssh-server \
 	pandoc \
 	pv \
+	python \
+	python-devel \
+	python-pip \
 	python3 \
 	python3-devel \
 	python3-pip \
