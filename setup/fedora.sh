@@ -6,27 +6,25 @@ set -e -v
 
 # TODO install build essential equivalent
 
-sudo dnf instll -y \
+sudo dnf install -y \
 	cmake \
 	ctags \
 	curl \
 	dtrx \
 	git \
 	gnupg \
-	linux-headers-$(uname -r) \
 	magic-wormhole \
 	make \
-	mosh \
 	ncdu \
 	openssh-server \
 	pandoc \
 	pv \
 	python3 \
-	python3-dev \
+	python3-devel \
 	python3-pip \
 	tmux \
 	vim \
-	virtualbox-guest-dkms \
+	virtualbox-guest-additions \
 	wget \
 	xclip \
 	zsh
