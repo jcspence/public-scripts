@@ -32,6 +32,8 @@ sudo dnf install -y \
 sudo dnf install -y \
 	"https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
 
+./setup/zerotier.sh
+
 ./setup/general-user-noninteractive.sh
 
 # === Begin Interactive ===

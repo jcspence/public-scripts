@@ -37,6 +37,8 @@ sudo apt install -y \
 
 # TODO configure sshd
 
+./setup/zerotier.sh
+
 ./setup/general-user-noninteractive.sh
 
 # === Begin Interactive ===
