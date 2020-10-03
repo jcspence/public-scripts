@@ -35,8 +35,6 @@ sudo apt install -y \
 	xclip \
 	zsh
 
-# TODO configure sshd
-
 ./setup/zerotier.sh
 
 ./setup/general-user-noninteractive.sh
