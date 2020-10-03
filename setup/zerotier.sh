@@ -2,15 +2,26 @@
 
 # Based on code at https://www.zerotier.com/download/
 
-keyring=/tmp/zerotier-install-keyring-dd5ad24d-932c-4935-92af-195bf1751814
-
-# TODO verify fingerprint
+firstring=/tmp/zerotier-install-keyring-f2128c78-e379-4d60-ac9b-8eeeca8a716a
+trustedring=/tmp/zerotier-install-trusted-keyring-f2128c78-e379-4d60-ac9b-8eeeca8a716a
+fpr=74A5E9C458E1A431F1DA57A71657198823E52A61
 
 curl -s https://raw.githubusercontent.com/zerotier/ZeroTierOne/master/doc/contact%40zerotier.com.gpg |
 	gpg \
 		--quiet \
 		--no-default-keyring \
-		--keyring "$keyring" \
+		--keyring "$firstring" \
+		--import
+
+gpg \
+	--quiet \
+	--no-default-keyring \
+	--keyring "$firstring" \
+	--export "$fpr" |
+	gpg \
+		--quiet \
+		--no-default-keyring \
+		--keyring "$trustedring" \
 		--import
 
 install=$(
@@ -18,6 +29,6 @@ install=$(
 	gpgv \
 		--enable-special-filenames \
 		--output - \
-		--keyring "$keyring")
+		--keyring "$trustedring")
 
 bash <<< "$install"
